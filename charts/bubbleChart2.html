@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<style>
+  body { font: 12px Arial;}
+  path {
+  stroke: steelblue; stroke-width: 2; fill: none;
+  }
+  .axis path, .axis line {
+  fill: none;
+  stroke: grey;
+  stroke-width: 1; shape-rendering: crispEdges;
+  }
+
+  .ca, .us {fill: #DF4949;}
+  .uc, .br, .mx {fill: #E27A3F;}
+  .other {fill: #45B29D;}
+
+  </style>
+<body>
+
+  <script src="../../js/d3.min.js"></script>
+
+  <script>
+      var diameter = 600,
+      format = d3.format(",d"),
+      color = d3.scale.category20c();
+
+      var svg = d3.select("body").append('svg')
+                .attr("width",diameter)
+                .attr("height", diameter);
+
+      var bubble = d3.layout.pack()
+                   .size([diameter,diameter])
+                   .padding(1)
+                   .value(function(d){return d.size;});
+
+d3.json("../../data/bubbleChart2Data.json", function(error,data){
+      var nodes = bubble.nodes(processData(data))
+                  .filter(function(d){return !d.children;});
+
+      var vis = svg.selectAll('circle')
+                .data(nodes, function(d){ return d.name;});
+
+          vis.enter().append('circle')
+             .attr("transform",function(d){ return 'translate(' + d.x + ',' + d.y + ')';})
+             .attr('r', function(d){ return d.r;})
+             .style("fill", function(d) { return color(d.name); });
+
+
+          vis.append("title")
+             .text(function(d){return d.className + ": " + d.size; });
+
+
+          vis.append("text")
+             .attr("dy", ".3em")
+             .style("text-anchor", "middle")
+             .text(function(d){return d.className.substring(0, d.r/3);});
+
+
+});
+
+      function processData(data){
+
+        var obj = data.countries_msg_vol;
+
+        var newDataSet = [];
+
+        for(var prop in obj){
+          newDataSet.push({name: prop, className: prop.toLowerCase(), size: obj[prop]});
+        }
+
+        return {children: newDataSet};
+
+      }
+
+
+  </script>
+</body>
+</html>

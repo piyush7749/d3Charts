@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<head>
+
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css">
+
+</head>
+<style>
+  body {
+    font-size: 14px;
+    font-family: Helvetica,Arial,sans-serif;
+    fill: #AAA;
+    }
+
+  .axis path, .axis line {
+  fill: none;
+  stroke: grey;
+  stroke-width: 1; shape-rendering: crispEdges;
+  }
+
+  .zeroLine{
+    fill: none;
+    stroke: lightgrey;
+    stroke-width: 1; shape-rendering: crispEdges;
+  }
+
+  .d3-tip {
+    line-height: 1;
+    font-weight: bold;
+    padding: 12px;
+    background: rgba(0, 0, 0, 0.8);
+    color: #fff;
+    border-radius: 2px;
+  }
+
+  .d3-tip:after {
+    box-sizing: border-box;
+    display: inline;
+    font-size: 10px;
+    width: 100%;
+    line-height: 1;
+    color: rgba(0, 0, 0, 0.8);
+    content: "\25BC";
+    position: absolute;
+    text-align: center;
+  }
+
+  .d3-tip {
+    /*   font-weight: bold; for tooltip commonality*/
+      padding: 12px;
+    /*   background: #5d5d5d !important; for tooltip commonality */
+      color: white ;
+  }
+
+  .d3-tip {
+    z-index: 9999;
+  }
+
+  .tooltip-header  {
+    text-align: center;
+    font-weight: bold;
+
+  }
+
+  .tooltip-inner {
+  text-align: center;
+  width: auto;
+  white-space: nowrap;
+  text-transform: none;
+   font-size: 120%;
+}
+
+
+  .text-center {
+    text-align: center;
+  }
+  </style>
+<body>
+
+  <script src="../../js/d3.min.js"></script>
+  <script src="../../js/d3-tooltip.js"></script>
+
+  <script>
+      var margin = {top:50, right:30, bottom: 30, left: 150},
+          width = 960 - margin.right - margin.left,
+          height = 560 - margin.top - margin.bottom;
+      var paddingBottom = 50;
+      var paddingTop = 20;
+      var formatPercent = d3.format(".0%");
+      var x = d3.scale.ordinal().rangeRoundBands([0, width],0.5);
+      var y = d3.scale.linear().range([height - paddingBottom,paddingTop]);
+      var r = d3.scale.linear().range([10,30]);
+
+      var colorPositive = d3.scale.linear();
+      var colorNegative = d3.scale.linear();
+
+      var xAxis = d3.svg.axis().scale(x).orient("bottom").tickSize(0)
+      var yAxis = d3.svg.axis().scale(y).orient("left").tickFormat(formatPercent);
+
+      var svg = d3.select("body")
+                .append("svg")
+                .attr("width", width + margin.left + margin.right)
+                .attr("height", height + margin.top + margin.bottom)
+                .append("g")
+                .attr("transform", "translate(" + margin.left + ", " + margin.top + ")");
+
+          d3.json("../../data/demographicData.json",function(error,data){
+
+            for (var d in data) {
+                data[d].deltaPercentage = parseFloat((data[d].deltaPercentage * 1).toFixed(2));
+                data[d].subsPercentage = parseFloat((data[d].subsPercentage * 1).toFixed(2));
+            }
+
+            data.forEach(function(d){
+              d.deltaPercentage = +d.deltaPercentage;
+            });
+
+              x.domain(data.map(function(d){ return d.demographic;}));
+              r.domain([0, d3.max(data, function(d){return d.subsPercentage;})]);
+              y.domain(d3.extent(data, function(d){return d.deltaPercentage;}));
+
+
+            var tip = d3.tip()
+						.attr('class', 'd3-tip')
+						.offset([-10, 0])
+						.html(function (d) {
+							return '<div class="tooltip-inner">' +
+													'<div class="tooltip-header">' + d.demographicValue + '</div>' +
+													'<span class="pull-left"># of Subs: </span>' +
+													'<span class="pull-right">' + d.numSubs + '</span><br />'+
+													'<span class="pull-left">Subs %: </span>' +
+													'<span class="pull-right">' + (d.subsPercentage * 10).toFixed(2) + ' %</span><br />' +
+                          '<span class="pull-left">Delta: </span>' +
+													'<span class="pull-right">' + (d.deltaPercentage * 100).toFixed(2) + ' %</span><br />' +
+														'</div>';
+						});
+
+            colorPositive.domain(
+                             [ d3.min(data, function(d) {
+                               return d.deltaPercentage;
+                             }), d3.max(data, function(d) {
+                               return d.deltaPercentage;
+                             }) ]).range([ "#ccd9e3", "#5883a4"]);
+
+           colorNegative.domain(
+                             [ d3.min(data, function(d) {
+                               return d.deltaPercentage;
+                             }), d3.max(data, function(d) {
+                               return d.deltaPercentage;
+                             }) ]).range([ "#faab5f", "#feeedf"]);
+
+            var xAxisEle = svg.append("g")
+               .attr("class", "x axis")
+               .attr("transform", "translate( 0," + height +   ")")
+               .call(xAxis);
+
+               xAxisEle.selectAll("text").attr("transform", "translate(-30,0)");
+
+            svg.append("g")
+               .attr("class","zeroLine")
+               .append("line")
+               .style("stroke-dasharray", ("1, 1"))
+               .attr("x1",0)
+               .attr("x2",width)
+               .attr("y1", y(0))
+               .attr("y2", y(0));
+
+           svg.append("g")
+              .attr("class","zeroLine")
+              .append("line")
+              .attr("x1", width)
+              .attr("x2", width)
+              .attr("y1", 0)
+              .attr("y2", height);
+
+          svg.append("g")
+             .attr("class","zeroLine")
+             .append("line")
+             .attr("x1",0)
+             .attr("x2",width)
+             .attr("y1", 0)
+             .attr("y2", 0);
+
+             svg.append("g")
+                .attr("class","axis")
+                .append("line")
+                .attr("x1",0)
+                .attr("x2",0)
+                .attr("y1", 0)
+                .attr("y2", height);
+
+            svg.append("g")
+               .attr("class", "y axis")
+               .call(yAxis);
+
+            svg.call(tip);
+
+              svg.selectAll(".circle")
+                .data(data)
+                .enter().append("circle")
+                .attr("class", "circle")
+                .attr("cx", function(d) { return x(d.demographic); })
+                .attr("cy", y(0))
+                .attr("r", 0)
+                .on("mouseover",tip.show)
+                .on("mouseout", tip.hide)
+                .style("fill","lightgrey")
+                .transition()
+    						.attr({
+    							cx: function (d) {
+    							    return x(d.demographic);
+    							},
+    							cy: function (d) {
+    							    return y(d.deltaPercentage);
+    							},
+                  r: function(d){
+                      return r(d.subsPercentage);
+                  }
+    						})
+                .style("fill",function(d){
+                  if(d.deltaPercentage >= 0) return colorPositive(d.deltaPercentage);
+                  else return colorNegative(d.deltaPercentage);
+                })
+                .duration(2000)
+                .delay(300);
+          });
+
+  </script>
+</body>
+</html>

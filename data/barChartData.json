@@ -1,0 +1,37 @@
+[
+  {
+    "age": "18-24",
+    "percentage": 0.05,
+    "reference": 0.22
+  },
+  {
+    "age": "25-34",
+    "percentage": 0.04,
+    "reference": 0.22
+  },
+  {
+    "age": "35-44",
+    "percentage": 0.10,
+    "reference": 0.20
+  },
+  {
+    "age": "45-54",
+    "percentage": 0.09,
+    "reference": 0.16
+  },
+  {
+    "age": "55-64",
+    "percentage": 0.42,
+    "reference": 0.19
+  },
+  {
+    "age": "65-74",
+    "percentage": 0.20,
+    "reference": 0.18
+  },
+  {
+    "age": "75+",
+    "percentage": 0.10,
+    "reference": 0.17
+  }
+]

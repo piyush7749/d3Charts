@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<style>
+
+  circle {
+  stroke: #000;
+  stroke-width: 1.5px;
+  }
+
+  </style>
+<body>
+
+  <script src="../../js/d3.min.js"></script>
+
+  <script>
+  // Ratio of Obese (BMI >= 30) in U.S. Adults, CDC 2008
+var valueById = [
+  79036,
+  33232,
+  138057,
+  449357,
+  108025,
+  67665,
+  27088,
+  27670,
+  248586,
+  175492,
+  24417,
+  61886,
+  37302,
+  180296,
+  117589,
+  44024,
+  47508,
+  46937,
+  130841,
+  125498,
+  18021,
+  164070,
+  101227,
+  54152,
+  16010,
+  26609,
+  221325,
+  24981,
+  47895,
+  37880,
+  216380,
+  42751,
+  43770,
+  352262,
+  310787,
+  20800,
+  68930,
+  250280,
+  19323,
+  108997,
+  24777,
+  128312,
+  244485,
+  163081,
+  41596,
+  179070,
+  11416,
+  128216,
+  71082,
+  13312,
+  18515
+];
+
+var margin = {top: 80, right: 0, bottom: 0, left: 0},
+    width = 960 - margin.left - margin.right,
+    height = 700 - margin.top - margin.bottom,
+    padding = 3;
+
+var color = d3.scale.category20();
+
+var projection = d3.geo.albersUsa();
+
+var radius = d3.scale.sqrt()
+    .domain([0, d3.max(valueById)])
+    .range([10, 50]);
+
+var force = d3.layout.force()
+    .charge(0)
+    .gravity(0)
+    .size([width, height]);
+
+var svg = d3.select("body").append("svg")
+    .attr("width", width)
+    .attr("height", height);
+
+d3.json("/data/us-state-centroids.json", function(error, states) {
+  var nodes = states.features
+      .filter(function(d) { return !isNaN(valueById[+d.id]); })
+      .map(function(d) {
+        var point = projection(d.geometry.coordinates),
+            value = valueById[+d.id];
+        if (isNaN(value)) fail();
+        return {
+          x: point[0], y: point[1],
+          x0: point[0], y0: point[1],
+          r: radius(value),
+          value: value
+        };
+      });
+
+  force
+      .nodes(nodes)
+      .on("tick", tick)
+      .start();
+
+  var node = svg.selectAll("rect")
+      .data(nodes)
+    .enter().append("rect")
+      .attr("width", function(d) { return d.r*2; })
+      .attr("height", function(d){ return d.r*2;})
+      .attr("fill", function(d){ return color(d.r);});
+
+  function tick(e) {
+    node.each(gravity(0.002))
+        .each(collide(.5))
+        .attr("x", function(d) { return d.x - d.r; })
+        .attr("y", function(d) { return d.y - d.r; });
+  }
+
+  function gravity(k) {
+    return function(d) {
+      d.x += (d.x0 - d.x) * k;
+      d.y += (d.y0 - d.y) * k;
+    };
+  }
+
+  function collide(k) {
+    var q = d3.geom.quadtree(nodes);
+    return function(node) {
+      var nr = node.r + padding,
+          nx1 = node.x - nr,
+          nx2 = node.x + nr,
+          ny1 = node.y - nr,
+          ny2 = node.y + nr;
+      q.visit(function(quad, x1, y1, x2, y2) {
+        if (quad.point && (quad.point !== node)) {
+          var x = node.x - quad.point.x,
+              y = node.y - quad.point.y,
+              l = x * x + y * y,
+              r = nr + quad.point.r;
+          if (l < r * r) {
+            l = ((l = Math.sqrt(l)) - r) / l * k;
+            node.x -= x *= l;
+            node.y -= y *= l;
+            quad.point.x += x;
+            quad.point.y += y;
+          }
+        }
+        return x1 > nx2 || x2 < nx1 || y1 > ny2 || y2 < ny1;
+      });
+    };
+  }
+});
+
+
+
+
+
+
+  </script>
+</body>
+</html>

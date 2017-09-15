@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<style>
+  body { font: 12px Arial;}
+  .bubble {
+  stroke: steelblue;
+  }
+  .axis path, .axis line {
+  fill: none;
+  stroke: grey;
+  stroke-width: 1; shape-rendering: crispEdges;
+  }
+  </style>
+<body>
+
+  <script src="../../js/d3.min.js"></script>
+
+  <script>
+      var margin = {top:30, right:30, bottom: 30, left: 50},
+          width = 600 - margin.right - margin.left,
+          height = 560 - margin.top - margin.bottom;
+
+
+      var svg = d3.select("body")
+                .append("svg")
+                .attr("width", '100%')
+                .attr("height", height + margin.top + margin.bottom)
+                .append("g")
+                .attr("transform", "translate(" + margin.left + ", " + margin.top + ")");
+
+          d3.json("../../data/bubbleChartData.json",function(data){
+
+            svg.selectAll(".bubble")
+               .data(data)
+               .enter().append("circle")
+               .attr("class","bubble")
+               .attr("cx", function(d){return d.x;})
+               .attr("cy",function(d){return d.y;})
+               .attr("r", function(d){return d.radius;})
+               .attr("fill", "steelblue");
+
+
+          });
+  </script>
+</body>
+</html>

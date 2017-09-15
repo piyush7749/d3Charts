@@ -1,0 +1,411 @@
+{
+  "message": "Success",
+  "retcode": 0,
+  "result": [
+    {
+      "popularsitesList": [
+        {
+          "popularSite": "apple.com",
+          "percentage": 0.5927,
+          "rank": 1,
+          "refPercentage": 0.5995,
+          "targetAudCount": 489250,
+          "refAudCount": 91750
+        },
+        {
+          "popularSite": "twitter .com",
+          "percentage": 0.4607,
+          "rank": 2,
+          "refPercentage": 0.5801,
+          "targetAudCount": 380330,
+          "refAudCount": 88780
+        },
+        {
+          "popularSite": "symcd.com",
+          "percentage": 0.4156,
+          "rank": 3,
+          "refPercentage": 0.3937,
+          "targetAudCount": 343050,
+          "refAudCount": 60240
+        },
+        {
+          "popularSite": "facebook.com",
+          "percentage": 0.3339,
+          "rank": 4,
+          "refPercentage": 0.3523,
+          "targetAudCount": 275610,
+          "refAudCount": 53920
+        },
+        {
+          "popularSite": "google.com",
+          "percentage": 0.3254,
+          "rank": 5,
+          "refPercentage": 0.2898,
+          "targetAudCount": 268640,
+          "refAudCount": 44350
+        },
+        {
+          "popularSite": "yahoo.com",
+          "percentage": 0.2148,
+          "rank": 6,
+          "refPercentage": 0.2394,
+          "targetAudCount": 177320,
+          "refAudCount": 36630
+        },
+        {
+          "popularSite": "symcb .com",
+          "percentage": 0.214,
+          "rank": 7,
+          "refPercentage": 0.199,
+          "targetAudCount": 176670,
+          "refAudCount": 30460
+        },
+        {
+          "popularSite": "bing.com",
+          "percentage": 0.2011,
+          "rank": 8,
+          "refPercentage": 0.1926,
+          "targetAudCount": 166050,
+          "refAudCount": 29470
+        },
+        {
+          "popularSite": "verisign.com",
+          "percentage": 0.189,
+          "rank": 9,
+          "refPercentage": 0.1876,
+          "targetAudCount": 156060,
+          "refAudCount": 28710
+        },
+        {
+          "popularSite": "neulion.com",
+          "percentage": 0.1735,
+          "rank": 10,
+          "refPercentage": 0.1988,
+          "targetAudCount": 143220,
+          "refAudCount": 30410
+        },
+        {
+          "popularSite": "digicert.com",
+          "percentage": 0.1528,
+          "rank": 11,
+          "refPercentage": 0.1193,
+          "targetAudCount": 126160,
+          "refAudCount": 18250
+        },
+        {
+          "popularSite": "lkqd.net",
+          "percentage": 0.1509,
+          "rank": 12,
+          "refPercentage": 0.1099,
+          "targetAudCount": 124580,
+          "refAudCount": 16820
+        },
+        {
+          "popularSite": "waze.com",
+          "percentage": 0.1508,
+          "rank": 13,
+          "refPercentage": 0.0119,
+          "targetAudCount": 124460,
+          "refAudCount": 1810
+        },
+        {
+          "popularSite": "accu-weather.com",
+          "percentage": 0.1226,
+          "rank": 14,
+          "refPercentage": 0.1204,
+          "targetAudCount": 101220,
+          "refAudCount": 18430
+        },
+        {
+          "popularSite": "instagram.com",
+          "percentage": 0.1195,
+          "rank": 15,
+          "refPercentage": 0.1141,
+          "targetAudCount": 98630,
+          "refAudCount": 17460
+        },
+        {
+          "popularSite": "weather .com",
+          "percentage": 0.1148,
+          "rank": 16,
+          "refPercentage": 0.1471,
+          "targetAudCount": 94740,
+          "refAudCount": 22510
+        },
+        {
+          "popularSite": "applovin.com",
+          "percentage": 0.1127,
+          "rank": 17,
+          "refPercentage": 0.0367,
+          "targetAudCount": 93060,
+          "refAudCount": 5610
+        },
+        {
+          "popularSite": "newrelic.com",
+          "percentage": 0.1072,
+          "rank": 18,
+          "refPercentage": 0.2279,
+          "targetAudCount": 88520,
+          "refAudCount": 34880
+        },
+        {
+          "popularSite": "simplereach.com",
+          "percentage": 0.1043,
+          "rank": 19,
+          "refPercentage": 0.1482,
+          "targetAudCount": 86120,
+          "refAudCount": 22680
+        },
+        {
+          "popularSite": "youtube .com",
+          "percentage": 0.1043,
+          "rank": 20,
+          "refPercentage": 0.0873,
+          "targetAudCount": 86130,
+          "refAudCount": 13350
+        },
+        {
+          "popularSite": "mythings.com",
+          "percentage": 0.1042,
+          "rank": 21,
+          "refPercentage": 0.0975,
+          "targetAudCount": 86010,
+          "refAudCount": 14910
+        },
+        {
+          "popularSite": "thirdpresence.com",
+          "percentage": 0.0987,
+          "rank": 22,
+          "refPercentage": 0.0756,
+          "targetAudCount": 81460,
+          "refAudCount": 11570
+        },
+        {
+          "popularSite": "amazon.com",
+          "percentage": 0.0919,
+          "rank": 23,
+          "refPercentage": 0.0756,
+          "targetAudCount": 75830,
+          "refAudCount": 11570
+        },
+        {
+          "popularSite": "littlethings.com",
+          "percentage": 0.0884,
+          "rank": 24,
+          "refPercentage": 0.0038,
+          "targetAudCount": 72980,
+          "refAudCount": 580
+        },
+        {
+          "popularSite": "likes.com",
+          "percentage": 0.0844,
+          "rank": 25,
+          "refPercentage": 0.0333,
+          "targetAudCount": 69660,
+          "refAudCount": 5090
+        },
+        {
+          "popularSite": "pandora.com",
+          "percentage": 0.0813,
+          "rank": 26,
+          "refPercentage": 0.0752,
+          "targetAudCount": 67120,
+          "refAudCount": 11510
+        },
+        {
+          "popularSite": "adbrn.com",
+          "percentage": 0.0668,
+          "rank": 27,
+          "refPercentage": 0.0551,
+          "targetAudCount": 55150,
+          "refAudCount": 8430
+        },
+        {
+          "popularSite": "msn.com",
+          "percentage": 0.0662,
+          "rank": 28,
+          "refPercentage": 0.0655,
+          "targetAudCount": 54640,
+          "refAudCount": 10020
+        },
+        {
+          "popularSite": "accuweather.com",
+          "percentage": 0.0616,
+          "rank": 29,
+          "refPercentage": 0.0654,
+          "targetAudCount": 50870,
+          "refAudCount": 10010
+        },
+        {
+          "popularSite": "icloud-content.com",
+          "percentage": 0.0615,
+          "rank": 30,
+          "refPercentage": 0.0629,
+          "targetAudCount": 50730,
+          "refAudCount": 9620
+        },
+        {
+          "popularSite": "samsungapps.com",
+          "percentage": 0.0602,
+          "rank": 31,
+          "refPercentage": 0.0578,
+          "targetAudCount": 49730,
+          "refAudCount": 8850
+        },
+        {
+          "popularSite": "polarmobile.com",
+          "percentage": 0.0594,
+          "rank": 32,
+          "refPercentage": 0.0519,
+          "targetAudCount": 49040,
+          "refAudCount": 7950
+        },
+        {
+          "popularSite": "king.com",
+          "percentage": 0.0588,
+          "rank": 33,
+          "refPercentage": 0.0338,
+          "targetAudCount": 48490,
+          "refAudCount": 5170
+        },
+        {
+          "popularSite": "elasticbeanstalk .com",
+          "percentage": 0.0585,
+          "rank": 34,
+          "refPercentage": 0.062,
+          "targetAudCount": 48310,
+          "refAudCount": 9490
+        },
+        {
+          "popularSite": "wordpress.com",
+          "percentage": 0.0582,
+          "rank": 35,
+          "refPercentage": 0.0708,
+          "targetAudCount": 48010,
+          "refAudCount": 10830
+        },
+        {
+          "popularSite": "kontagent.net",
+          "percentage": 0.0576,
+          "rank": 36,
+          "refPercentage": 0.0312,
+          "targetAudCount": 47520,
+          "refAudCount": 4770
+        },
+        {
+          "popularSite": "godaddy.com",
+          "percentage": 0.0571,
+          "rank": 37,
+          "refPercentage": 0.0547,
+          "targetAudCount": 47130,
+          "refAudCount": 8360
+        },
+        {
+          "popularSite": "dyntrk.com",
+          "percentage": 0.0566,
+          "rank": 38,
+          "refPercentage": 0.0583,
+          "targetAudCount": 46720,
+          "refAudCount": 8920
+        },
+        {
+          "popularSite": "aol .com",
+          "percentage": 0.0565,
+          "rank": 39,
+          "refPercentage": 0.048,
+          "targetAudCount": 46600,
+          "refAudCount": 7340
+        },
+        {
+          "popularSite": "provenpixel.com",
+          "percentage": 0.0565,
+          "rank": 40,
+          "refPercentage": 0.0486,
+          "targetAudCount": 46620,
+          "refAudCount": 7430
+        },
+        {
+          "popularSite": "opendsp.com",
+          "percentage": 0.0549,
+          "rank": 41,
+          "refPercentage": 0.0497,
+          "targetAudCount": 45280,
+          "refAudCount": 7610
+        },
+        {
+          "popularSite": "yashi.com",
+          "percentage": 0.0532,
+          "rank": 42,
+          "refPercentage": 0.0564,
+          "targetAudCount": 43890,
+          "refAudCount": 8630
+        },
+        {
+          "popularSite": "sumome.com",
+          "percentage": 0.0527,
+          "rank": 43,
+          "refPercentage": 0.0358,
+          "targetAudCount": 43470,
+          "refAudCount": 5480
+        },
+        {
+          "popularSite": "pinterest .com",
+          "percentage": 0.0524,
+          "rank": 44,
+          "refPercentage": 0.0151,
+          "targetAudCount": 43280,
+          "refAudCount": 2310
+        },
+        {
+          "popularSite": "wfxtriggers.com",
+          "percentage": 0.051,
+          "rank": 45,
+          "refPercentage": 0.0709,
+          "targetAudCount": 42120,
+          "refAudCount": 10840
+        },
+        {
+          "popularSite": "imwx.com",
+          "percentage": 0.0498,
+          "rank": 46,
+          "refPercentage": 0.0693,
+          "targetAudCount": 41070,
+          "refAudCount": 10600
+        },
+        {
+          "popularSite": "perfectmarket.com",
+          "percentage": 0.0488,
+          "rank": 47,
+          "refPercentage": 0.0363,
+          "targetAudCount": 40290,
+          "refAudCount": 5540
+        },
+        {
+          "popularSite": "ksmobile .com",
+          "percentage": 0.0481,
+          "rank": 48,
+          "refPercentage": 0.0445,
+          "targetAudCount": 39670,
+          "refAudCount": 6810
+        },
+        {
+          "popularSite": "stumbleupon.com",
+          "percentage": 0.0476,
+          "rank": 49,
+          "refPercentage": 0.0369,
+          "targetAudCount": 39250,
+          "refAudCount": 5640
+        },
+        {
+          "popularSite": "microsoft.com",
+          "percentage": 0.0442,
+          "rank": 50,
+          "refPercentage": 0.0397,
+          "targetAudCount": 36510,
+          "refAudCount": 6070
+        }
+      ],
+      "totalPopulation": 0
+    }
+  ]
+}

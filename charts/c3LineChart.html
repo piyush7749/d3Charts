@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<head>
+<style>
+  body { font: 12px Arial;}
+  .bar {
+    fill: steelblue;
+  }
+  .axis path, .axis line {
+  fill: none;
+  stroke: grey;
+  stroke-width: 1; shape-rendering: crispEdges;
+  }
+  #chart .c3-line-data1  {
+    stroke: '#5883a4';
+    stroke-width: 3px;
+  }
+  #chart .c3-line-data2  {
+    stroke: "#faab5f" ;
+    stroke-width: 3px;
+  }
+
+  </style>
+
+<link href="../../css/c3.min.css" rel="stylesheet" type="text/css">
+
+</head>
+<body>
+  <div id="chart"></div>
+
+  <script src="../../js/d3.min.js"></script>
+  <script src="../../js/c3.min.js"></script>
+
+  <script>
+
+var chart = c3.generate({
+
+  bindto: "#chart",
+  data:{
+      columns:[
+       ['baseball', 30, 200, 100, 400, 150, 250],
+       ['football', 50, 20, 10, 40, 15, 25],
+       ['soccer', 150, 50, 60, 300, 250, 100]
+     ]
+   }
+})
+
+
+  </script>
+</body>
+</html>

@@ -1,0 +1,354 @@
+[
+    {
+        "group": "age",
+        "id": "1",
+        "demographicValue": "35 - 44",
+        "numSubs": "35405",
+        "subsPercentage": "0.273155113",
+        "deltaPercentage": "0.03326216"
+    },
+    {
+        "group": "age",
+        "id": "2",
+        "demographicValue": "45 - 54",
+        "numSubs": "30390",
+        "subsPercentage": "0.234463604",
+        "deltaPercentage": "-0.027095516"
+    },
+    {
+        "group": "age",
+        "id": "3",
+        "demographicValue": "25 - 34",
+        "numSubs": "27783",
+        "subsPercentage": "0.214350191",
+        "deltaPercentage": "0.042128358"
+    },
+    {
+        "group": "age",
+        "id": "4",
+        "demographicValue": "55 - 64",
+        "numSubs": "20667",
+        "subsPercentage": "0.159449138",
+        "deltaPercentage": "-0.033367071"
+    },
+    {
+        "group": "age",
+        "id": "5",
+        "demographicValue": "65 - 74",
+        "numSubs": "9807",
+        "subsPercentage": "0.075662539",
+        "deltaPercentage": "-0.007114403"
+    },
+    {
+        "group": "age",
+        "id": "6",
+        "demographicValue": "18 - 24",
+        "numSubs": "3226",
+        "subsPercentage": "0.024889095",
+        "deltaPercentage": "-0.002381036"
+    },
+    {
+        "group": "age",
+        "id": "7",
+        "demographicValue": "75+",
+        "numSubs": "2337",
+        "subsPercentage": "0.018030321",
+        "deltaPercentage": "-0.005432492"
+    },
+    {
+        "group": "income",
+        "id": "8",
+        "demographicValue": "$50,000 - $74,999",
+        "numSubs": "37912",
+        "subsPercentage": "0.245835414",
+        "deltaPercentage": "-0.020058592"
+    },
+    {
+        "group": "income",
+        "id": "9",
+        "demographicValue": "$75,000 - $99,999",
+        "numSubs": "28848",
+        "subsPercentage": "0.187061089",
+        "deltaPercentage": "0.004291339"
+    },
+    {
+        "group": "income",
+        "id": "10",
+        "demographicValue": "$100,000 - $124,999",
+        "numSubs": "17933",
+        "subsPercentage": "0.116284197",
+        "deltaPercentage": "0.002853447"
+    },
+    {
+        "group": "income",
+        "id": "11",
+        "demographicValue": "$35,000 - $49,999",
+        "numSubs": "14496",
+        "subsPercentage": "0.093997419",
+        "deltaPercentage": "-0.018096418"
+    },
+    {
+        "group": "income",
+        "id": "12",
+        "demographicValue": "$125,000 - $149,999",
+        "numSubs": "9994",
+        "subsPercentage": "0.064804788",
+        "deltaPercentage": "0.007592143"
+    },
+    {
+        "group": "income",
+        "id": "13",
+        "demographicValue": "$150,000 - $174,999",
+        "numSubs": "7811",
+        "subsPercentage": "0.05064941",
+        "deltaPercentage": "0.006168118"
+    },
+    {
+        "group": "income",
+        "id": "14",
+        "demographicValue": "$175,000 - $199,999",
+        "numSubs": "7087",
+        "subsPercentage": "0.045954726",
+        "deltaPercentage": "0.011066871"
+    },
+    {
+        "group": "income",
+        "id": "15",
+        "demographicValue": "$25,000 - $34,999",
+        "numSubs": "7041",
+        "subsPercentage": "0.045656445",
+        "deltaPercentage": "-0.005192422"
+    },
+    {
+        "group": "income",
+        "id": "16",
+        "demographicValue": "$15,000 - $24,999",
+        "numSubs": "6348",
+        "subsPercentage": "0.041162777",
+        "deltaPercentage": "-0.003179007"
+    },
+    {
+        "group": "income",
+        "id": "17",
+        "demographicValue": "$250,000+",
+        "numSubs": "6137",
+        "subsPercentage": "0.039794575",
+        "deltaPercentage": "0.012882029"
+    },
+    {
+        "group": "income",
+        "id": "18",
+        "demographicValue": "$200,000 - $249,999",
+        "numSubs": "5608",
+        "subsPercentage": "0.036364344",
+        "deltaPercentage": "0.006003285"
+    },
+    {
+        "group": "income",
+        "id": "19",
+        "demographicValue": "$1,000 - $14,999",
+        "numSubs": "5002",
+        "subsPercentage": "0.032434816",
+        "deltaPercentage": "-0.004330794"
+    },
+    {
+        "group": "occupation",
+        "id": "20",
+        "demographicValue": "Professional/Technical",
+        "numSubs": "51391",
+        "subsPercentage": "0.581135788",
+        "deltaPercentage": "0.018462906"
+    },
+    {
+        "group": "occupation",
+        "id": "21",
+        "demographicValue": "Blue Collar",
+        "numSubs": "24995",
+        "subsPercentage": "0.282646553",
+        "deltaPercentage": "-0.003719877"
+    },
+    {
+        "group": "occupation",
+        "id": "22",
+        "demographicValue": "Retired",
+        "numSubs": "6424",
+        "subsPercentage": "0.072643387",
+        "deltaPercentage": "-0.013772272"
+    },
+    {
+        "group": "occupation",
+        "id": "23",
+        "demographicValue": "Other",
+        "numSubs": "4625",
+        "subsPercentage": "0.052300072",
+        "deltaPercentage": "-0.001164226"
+    },
+    {
+        "group": "occupation",
+        "id": "24",
+        "demographicValue": "Sales/Service",
+        "numSubs": "997",
+        "subsPercentage": "0.011274199",
+        "deltaPercentage": "0.000193468"
+    },
+    {
+        "group": "education",
+        "id": "25",
+        "demographicValue": "Some College",
+        "numSubs": "40605",
+        "subsPercentage": "0.342259647",
+        "deltaPercentage": "-0.004327462"
+    },
+    {
+        "group": "education",
+        "id": "26",
+        "demographicValue": "Bachelors Degree",
+        "numSubs": "34619",
+        "subsPercentage": "0.291803638",
+        "deltaPercentage": "0.031110118"
+    },
+    {
+        "group": "education",
+        "id": "27",
+        "demographicValue": "High School Diploma",
+        "numSubs": "24645",
+        "subsPercentage": "0.207732767",
+        "deltaPercentage": "-0.049397394"
+    },
+    {
+        "group": "education",
+        "id": "28",
+        "demographicValue": "Graduate Degree",
+        "numSubs": "18769",
+        "subsPercentage": "0.158203948",
+        "deltaPercentage": "0.022614738"
+    },
+    {
+        "group": "home_value",
+        "id": "29",
+        "demographicValue": "0 - 200,000",
+        "numSubs": "63433",
+        "subsPercentage": "0.489301142",
+        "deltaPercentage": "-0.051197548"
+    },
+    {
+        "group": "home_value",
+        "id": "30",
+        "demographicValue": "200,001 - 400,000",
+        "numSubs": "41530",
+        "subsPercentage": "0.320348658",
+        "deltaPercentage": "0.016504391"
+    },
+    {
+        "group": "home_value",
+        "id": "31",
+        "demographicValue": "400,001 - 1,000,000",
+        "numSubs": "21370",
+        "subsPercentage": "0.164841098",
+        "deltaPercentage": "0.027433475"
+    },
+    {
+        "group": "home_value",
+        "id": "32",
+        "demographicValue": "1,000,001 - 10,000,000",
+        "numSubs": "3307",
+        "subsPercentage": "0.025509102",
+        "deltaPercentage": "0.007259682"
+    },
+    {
+        "group": "residence",
+        "id": "33",
+        "demographicValue": "10 - 25",
+        "numSubs": "39829",
+        "subsPercentage": "0.307227707",
+        "deltaPercentage": "-0.039933337"
+    },
+    {
+        "group": "residence",
+        "id": "34",
+        "demographicValue": "5 - 9",
+        "numSubs": "33619",
+        "subsPercentage": "0.259325825",
+        "deltaPercentage": "0.015140106"
+    },
+    {
+        "group": "residence",
+        "id": "35",
+        "demographicValue": "Less Than 1",
+        "numSubs": "18056",
+        "subsPercentage": "0.139278001",
+        "deltaPercentage": "0.012919763"
+    },
+    {
+        "group": "residence",
+        "id": "36",
+        "demographicValue": "1 - 2",
+        "numSubs": "16571",
+        "subsPercentage": "0.127823203",
+        "deltaPercentage": "0.01271131"
+    },
+    {
+        "group": "residence",
+        "id": "37",
+        "demographicValue": "3 - 4",
+        "numSubs": "13647",
+        "subsPercentage": "0.105268436",
+        "deltaPercentage": "0.006987993"
+    },
+    {
+        "group": "residence",
+        "id": "38",
+        "demographicValue": "26+",
+        "numSubs": "7918",
+        "subsPercentage": "0.061076828",
+        "deltaPercentage": "-0.007825835"
+    },
+    {
+        "group": "children ages",
+        "id": "39",
+        "demographicValue": "0-3",
+        "numSubs": "23262",
+        "subsPercentage": "0.226619126",
+        "deltaPercentage": "0.020316947"
+    },
+    {
+        "group": "children ages",
+        "id": "40",
+        "demographicValue": "4-6",
+        "numSubs": "18598",
+        "subsPercentage": "0.181182293",
+        "deltaPercentage": "0.00728202"
+    },
+    {
+        "group": "children ages",
+        "id": "41",
+        "demographicValue": "16-18",
+        "numSubs": "16239",
+        "subsPercentage": "0.158200842",
+        "deltaPercentage": "-0.016468271"
+    },
+    {
+        "group": "children ages",
+        "id": "42",
+        "demographicValue": "7-9",
+        "numSubs": "16174",
+        "subsPercentage": "0.15756761",
+        "deltaPercentage": "0.009967044"
+    },
+    {
+        "group": "children ages",
+        "id": "43",
+        "demographicValue": "10-12",
+        "numSubs": "14978",
+        "subsPercentage": "0.145916141",
+        "deltaPercentage": "-0.001513444"
+    },
+    {
+        "group": "children ages",
+        "id": "44",
+        "demographicValue": "13-15",
+        "numSubs": "13397",
+        "subsPercentage": "0.13051399",
+        "deltaPercentage": "-0.019584296"
+    }
+]

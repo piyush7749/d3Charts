@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<head>
+  <title>Demographic Chart</title>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css">
+
+
+</head>
+<style>
+    a, a:visited, a:active {
+    color: #444;
+    }
+
+    #vis {
+    width: 1240px;
+    height: 600px;
+    clear: both;
+    margin-bottom: 10px;
+    }
+
+    footer {
+    text-align: center;
+    }
+
+    #view_selection {
+    margin-top: 10px;
+    }
+
+    .years {
+    font-size: 21px;
+    fill: #aaa;
+    }
+
+    .tooltip {
+    position: absolute;
+    top: 100px;
+    left: 100px;
+    -moz-border-radius:5px;
+    border-radius: 5px;
+    border: 2px solid #000;
+    /* background: #222222; */
+    background: #fff;
+    opacity: .9;
+    /* color: #eeeeee; */
+    color: black;
+    padding: 10px;
+    width: 300px;
+    font-size: 12px;
+    z-index: 10;
+    }
+
+    .tooltip .title {
+    font-size: 13px;
+    }
+
+    .tooltip .name {
+    font-weight:bold;
+    }
+    a.btn{
+      background-color: #ededed;
+      border: 1px solid #dbdbdb;
+    }
+    a.btn.active{
+      background-color: #dbdbdb;
+    }
+
+    .axis path, .axis line {
+    fill: none;
+    stroke: grey;
+    stroke-width: 1; shape-rendering: crispEdges;
+    }
+
+    .zeroLine{
+      fill: none;
+      stroke: lightgrey;
+      stroke-width: 1; shape-rendering: crispEdges;
+    }
+
+    .d3-tip {
+      line-height: 1;
+      font-weight: bold;
+      padding: 12px;
+      background: rgba(0, 0, 0, 0.8);
+      color: #fff;
+      border-radius: 2px;
+    }
+
+    .d3-tip:after {
+      box-sizing: border-box;
+      display: inline;
+      font-size: 10px;
+      width: 100%;
+      line-height: 1;
+      color: rgba(0, 0, 0, 0.8);
+      content: "\25BC";
+      position: absolute;
+      text-align: center;
+    }
+
+    .d3-tip {
+      /*   font-weight: bold; for tooltip commonality*/
+        padding: 12px;
+      /*   background: #5d5d5d !important; for tooltip commonality */
+        color: white ;
+    }
+
+    .d3-tip {
+      z-index: 9999;
+    }
+
+    .tooltip-header  {
+      text-align: center;
+      font-weight: bold;
+
+    }
+
+    .tooltip-inner {
+    text-align: center;
+    width: auto;
+    white-space: nowrap;
+    text-transform: none;
+     font-size: 120%;
+  }
+
+
+    .text-center {
+      text-align: center;
+    }
+
+</style>
+<body>
+
+  <div id="container" class="container">
+    <header>
+    </header>
+    <div id="main" role="main">
+      <div id="view_selection" class="btn-group">
+        <a href="#" id="all" class="btn active">All Groups</a>
+        <a href="#" id="group" class="btn">Groups By Demographic</a>
+      </div>
+      <div id="vis"></div>
+    </div>
+  </div>
+
+<script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
+<script src="../../js/d3.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+<script src="../../js/d3-tooltip.js"></script>
+
+
+  <script>
+
+              d3.json("../../data/forceDemographic.json", function(data) {
+                custom_bubble_chart.init(data);
+                custom_bubble_chart.toggle_view('all');
+              });
+
+
+              $(document).ready(function() {
+                $('#view_selection a').click(function() {
+                  var view_type = $(this).attr('id');
+                  $('#view_selection a').removeClass('active');
+                  $(this).toggleClass('active');
+                  if(view_type == 'all' || view_type == 'group'){
+                    custom_bubble_chart.toggle_view(view_type);
+                  }
+                  else {
+                    deltaDemographicChart();
+                  }
+                  return false;
+                });
+              });
+
+
+          var custom_bubble_chart = (function(d3, CustomTooltip) {
+              "use strict";
+
+              var width = 1240,
+                  height = 600,
+                  tooltip = CustomTooltip("gates_tooltip", 240),
+                  layout_gravity = -0.01,
+                  damper = 0.1,
+                  nodes = [],
+                  vis, force, circles, radius_scale;
+
+              var center = {x: width / 2, y: height / 2};
+
+              var demographic_centers = {
+                  "age": {x: 200, y: height / 2},
+                  "income": {x: width * 0.27, y: height / 2},
+                  "occupation": {x:  width * 0.37, y: height / 2},
+                  "education": {x: width * 0.49, y: height / 2},
+                  "home_value": {x:  width * 0.60, y: height / 2},
+                  "residence": {x: width * 0.72, y: height / 2},
+                  "children ages": {x: width *0.83, y: height / 2}
+                };
+
+              var fill_color_positive =  d3.scale.linear();
+              var fill_color_negative =  d3.scale.linear();
+
+              function custom_chart(data) {
+                var max_amount = d3.max(data, function(d) { return parseInt(d.numSubs, 10); } );
+                radius_scale = d3.scale.pow().exponent(0.5).domain([0, max_amount]).range([2, 60]);
+
+
+                 fill_color_positive.domain(
+                                  [ d3.min(data, function(d) {
+                                    return d.deltaPercentage;
+                                  }), d3.max(data, function(d) {
+                                    return d.deltaPercentage;
+                                  }) ]).range([ "#ccd9e3", "#5883a4"]);
+
+                fill_color_negative.domain(
+                                  [ d3.min(data, function(d) {
+                                    return d.deltaPercentage;
+                                  }), d3.max(data, function(d) {
+                                    return d.deltaPercentage;
+                                  }) ]).range([ "#faab5f", "#feeedf"]);
+
+                //create node objects from original data
+                //that will serve as the data behind each
+                //bubble in the vis, then add each node
+                //to nodes to be used later
+                data.forEach(function(d){
+                  var node = {
+                    id: d.id,
+                    radius: radius_scale(parseInt(d.numSubs, 10)),
+                    value: d.numSubs,
+                    name: d.demographicValue,
+                    group: d.group,
+                    delta: d.deltaPercentage,
+                    x: Math.random() * 900,
+                    y: Math.random() * 800
+                  };
+                  nodes.push(node);
+                });
+
+                nodes.sort(function(a, b) {return b.value - a.value; });
+
+                vis = d3.select("#vis").append("svg")
+                            .attr("width", width)
+                            .attr("height", height)
+                            .attr("id", "svg_vis");
+
+                circles = vis.selectAll("circle")
+                             .data(nodes, function(d) { return d.id ;});
+
+                circles.enter().append("circle")
+                  .attr("r", 0)
+                  .attr("fill", function(d)  {
+                    if(d.delta > 0) return fill_color_positive(d.delta) ;
+                    else return fill_color_negative(d.delta) ;
+                    })
+                  .attr("stroke-width", 2)
+                  .attr("stroke", function(d) {return d3.rgb(fill_color_positive(d.delta)).darker();})
+                  .attr("id", function(d) { return  "bubble_" + d.id; })
+                  .on("mouseover", function(d, i) {show_details(d, i, this);} )
+                  .on("mouseout", function(d, i) {hide_details(d, i, this);} );
+
+                circles.transition().duration(2000).attr("r", function(d) { return d.radius; });
+
+              }
+
+              function charge(d) {
+                return -Math.pow(d.radius, 2.0) / 8;
+              }
+
+              function start() {
+                force = d3.layout.force()
+                        .nodes(nodes)
+                        .size([width, height]);
+              }
+
+              function display_group_all() {
+                force.gravity(layout_gravity)
+                     .charge(charge)
+                     .friction(0.7)
+                     .on("tick", function(e) {
+                        circles.each(move_towards_center(e.alpha))
+                               .attr("cx", function(d) {return d.x;})
+                               .attr("cy", function(d) {return d.y;});
+                     });
+                force.start();
+                hide_years();
+              }
+
+              function move_towards_center(alpha) {
+                return function(d) {
+                  d.x = d.x + (center.x - d.x) * (damper + 0.02) * alpha;
+                  d.y = d.y + (center.y - d.y) * (damper + 0.02) * alpha;
+                };
+              }
+
+              function display_by_group() {
+                force.gravity(layout_gravity)
+                     .charge(charge)
+                     .friction(0.75)
+                    .on("tick", function(e) {
+                      circles.each(move_towards_group(e.alpha))
+                             .attr("cx", function(d) {return d.x;})
+                             .attr("cy", function(d) {return d.y;});
+                    });
+                force.start();
+                display_groups();
+              }
+
+              function move_towards_group(alpha) {
+                return function(d) {
+                  var target = demographic_centers[d.group];
+                  if(target){
+                    d.x = d.x + (target.x - d.x) * (damper + 0.02) * alpha * 1.1;
+                    d.y = d.y + (target.y - d.y) * (damper + 0.02) * alpha * 1.1;
+                  }
+                  else{
+                    console.log(d);
+                  }
+                };
+              }
+              function display_groups() {
+                  var years_x = {"age": 80, "income": width * 0.22, "occupation": width * 0.35,
+                                 "education": width * 0.47, "home_value": width * 0.62, "residence": width * 0.76, "children ages": width *0.90 };
+
+                  var years_data = d3.keys(years_x);
+                  var years = vis.selectAll(".years")
+                             .data(years_data);
+
+                  years.enter().append("text")
+                               .attr("class", "years")
+                               .attr("x", function(d) { return years_x[d]; }  )
+                               .attr("y", 40)
+                               .attr("text-anchor", "middle")
+                               .text(function(d) { return d;});
+
+              }
+
+              function hide_years() {
+                  var years = vis.selectAll(".years").remove();
+              }
+
+
+              function show_details(data, i, element) {
+                d3.select(element).attr("stroke", "black");
+                var content = "<span class=\"name\">Group:</span><span class=\"value\"> " + data.name + "</span><br/>";
+                content +="<span class=\"name\"># of Subscribers:</span><span class=\"value\"> " + addCommas(data.value) + "</span><br/>";
+                content +="<span class=\"name\">Delta :</span><span class=\"value\"> " + (data.delta * 100).toFixed(2) + "%</span>";
+                tooltip.showTooltip(content, d3.event);
+              }
+
+              function hide_details(data, i, element) {
+                d3.select(element).attr("stroke", function(d) { return d3.rgb(fill_color_positive(d.delta)).darker();} );
+                tooltip.hideTooltip();
+              }
+
+              var my_mod = {};
+              my_mod.init = function (_data) {
+                custom_chart(_data);
+                start();
+              };
+
+              my_mod.display_all = display_group_all;
+              my_mod.display_group = display_by_group;
+              my_mod.toggle_view = function(view_type) {
+                if (view_type == 'group') {
+                  display_by_group();
+                } else if (view_type == 'delta'){
+                  display_by_delta();
+                }
+                else{
+                  display_group_all();
+                }
+
+                };
+
+              return my_mod;
+          })(d3, CustomTooltip);
+
+
+        function addCommas(nStr)
+        {
+        	nStr += '';
+        	x = nStr.split('.');
+        	x1 = x[0];
+        	x2 = x.length > 1 ? '.' + x[1] : '';
+        	var rgx = /(\d+)(\d{3})/;
+        	while (rgx.test(x1)) {
+        		x1 = x1.replace(rgx, '$1' + ',' + '$2');
+        	}
+        	return x1 + x2;
+        }
+
+        function CustomTooltip(tooltipId, width){
+      	var tooltipId = tooltipId;
+      	$("body").append("<div class='tooltip' id='"+tooltipId+"'></div>");
+
+      	if(width){
+      		$("#"+tooltipId).css("width", width);
+      	}
+
+      	hideTooltip();
+
+      	function showTooltip(content, event){
+      		$("#"+tooltipId).html(content);
+      		$("#"+tooltipId).show();
+
+      		updatePosition(event);
+      	}
+
+      	function hideTooltip(){
+      		$("#"+tooltipId).hide();
+      	}
+
+      	function updatePosition(event){
+      		var ttid = "#"+tooltipId;
+      		var xOffset = 20;
+      		var yOffset = 10;
+
+      		 var ttw = $(ttid).width();
+      		 var tth = $(ttid).height();
+      		 var wscrY = $(window).scrollTop();
+      		 var wscrX = $(window).scrollLeft();
+      		 var curX = (document.all) ? event.clientX + wscrX : event.pageX;
+      		 var curY = (document.all) ? event.clientY + wscrY : event.pageY;
+      		 var ttleft = ((curX - wscrX + xOffset*2 + ttw) > $(window).width()) ? curX - ttw - xOffset*2 : curX + xOffset;
+      		 if (ttleft < wscrX + xOffset){
+      		 	ttleft = wscrX + xOffset;
+      		 }
+      		 var tttop = ((curY - wscrY + yOffset*2 + tth) > $(window).height()) ? curY - tth - yOffset*2 : curY + yOffset;
+      		 if (tttop < wscrY + yOffset){
+      		 	tttop = curY + yOffset;
+      		 }
+      		 $(ttid).css('top', tttop + 'px').css('left', ttleft + 'px');
+      	}
+
+      	return {
+      		showTooltip: showTooltip,
+      		hideTooltip: hideTooltip,
+      		updatePosition: updatePosition
+      	}
+      }
+
+  </script>
+
+</body>
+</html>
